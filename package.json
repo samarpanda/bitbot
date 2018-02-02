@@ -7,7 +7,13 @@
   "author": "Samar Panda <er.samarpanda@gmail.com> (https://samarpanda.com/)",
   "license": "MIT",
   "devDependencies": {
-    "bcrypt": "^1.0.3",
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {"bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "colors": "^1.1.2",
     "cors": "^2.8.4",
@@ -20,12 +26,5 @@
     "moment": "2.20.1",
     "mongoose": "^4.11.9",
     "morgan": "^1.8.2",
-    "superagent": "3.8.2"
-  },
-  "scripts": {
-    "start": "node index.js",
-    "test": "",
-    "dev": "nodemon index.js"
-  },
-  "dependencies": {}
+  }
 }
