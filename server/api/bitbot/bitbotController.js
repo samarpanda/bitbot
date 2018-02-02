@@ -15,6 +15,7 @@ exports.get = function(req, res){
 
 exports.post = function(req, res, next){
   let messaging_events = req.body.entry[0].messaging
+  console.log("$$$$ messaging_events " + messaging_events.length)
   for (let i = 0; i < messaging_events.length; i++) {
     let event = messaging_events[i]
     let sender = event.sender.id
@@ -29,10 +30,10 @@ function wapiCall(text, sender){
   console.log("$$$$ text from request " + util.inspect(text, {depth: null}))
   wapi.message(text)
       .then((wres) => {
-        console.log("$$$$ response form wapi " + util.inspect(wres, {depth: null}))
+        // console.log("$$$$ response form wapi " + util.inspect(wres, {depth: null}))
         let entities = wres.entities
         let location = entities.location[0].value
-        console.log(entities.location)
+        console.log("$$$$$$ " + entities.location)
         let user_action = entities.user_action[0].value
         switch(user_action){      
             case "search_intent":
