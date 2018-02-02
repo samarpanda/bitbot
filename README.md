@@ -1,0 +1,2 @@
+# bitbot
+bitbot hackathon project
