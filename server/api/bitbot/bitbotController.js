@@ -30,7 +30,7 @@ function wapiCall(text, sender){
   console.log("$$$$ text from request " + util.inspect(text, {depth: null}))
   wapi.message(text)
       .then((wres) => {
-        // console.log("$$$$ response form wapi " + util.inspect(wres, {depth: null}))
+        console.log("$$$$ response form wapi " + util.inspect(wres, {depth: null}))
         let entities = wres.entities
         let location = entities.location[0].value
         console.log("$$$$$$ " + entities.location)
