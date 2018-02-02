@@ -42,7 +42,7 @@ function wapiCall(text, sender){
               search.search(wres._text)
                   .then((dres) => {
                     let dres = JSON.parse(dres.docs)
-                    // console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
+                    console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
                     sendText(dres, sender)
                   })
                   .catch((err) => {
