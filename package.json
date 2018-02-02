@@ -7,6 +7,7 @@
   "author": "Samar Panda <er.samarpanda@gmail.com> (https://samarpanda.com/)",
   "license": "MIT",
   "devDependencies": {
+    
   },
   "scripts": {
     "start": "node index.js",
@@ -26,5 +27,5 @@
     "moment": "2.20.1",
     "mongoose": "^4.11.9",
     "morgan": "^1.8.2",
-  }
+  "superagent": "3.8.2"}
 }
