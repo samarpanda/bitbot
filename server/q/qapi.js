@@ -74,18 +74,3 @@ module.exports.getLiveOnQuikr = function(headerObj){
     })
   })
 }
-
-module.exports.getSharedLeads = function(headerObj){
-  return new Promise((resolve, reject) => {
-    // console.log(headerObj);
-    // console.log(`${config.publicApi()}/realestate/v1/getLeadSharedDetails?key=5C52937c60267G421473&companyId=21473&startDate=2016-12-27&endDate=2017-02-06`);
-    request
-    .get(`https://api.quikr.com/realestate/v1/getLeadSharedDetails?key=k0l42tqpucuxcdt50hyj7bdairjup36o&startDate=2016-12-27&endDate=2018-02-22`)
-    .set(headerObj)
-    .end((err, res) => {
-      // console.log(err)
-      err ? reject(err) : resolve(res)
-    })
-  })
-
-}
