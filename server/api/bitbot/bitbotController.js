@@ -41,6 +41,7 @@ function wapiCall(text, sender){
             case "search_intent":
               search.search(wres._text)
                   .then((wres) => {
+                    let wres = JSON.parse(wres)
                     // console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
                     sendText(wres, sender)
                   })
