@@ -1269,6 +1269,8 @@ var search = function(query){
         "state": null
     }
 }`)
+
+
   return new Promise((resolve, reject) => {
     request
       .post('http://192.168.124.124:8999/search-ads')
@@ -1318,7 +1320,8 @@ var search = function(query){
         err ? reject(err) : resolve(res);
       })
   })
-
-module.exports.search = search
+})
 
 }
+
+module.exports.search = search
