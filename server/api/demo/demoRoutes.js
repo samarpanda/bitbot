@@ -6,4 +6,7 @@ router.route('/')
   .get(controller.get)
   .post(controller.post)
 
+router.route('/getpopularads')
+  .get(controller.getPopularAds)
+
 module.exports = router
