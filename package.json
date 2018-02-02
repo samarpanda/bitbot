@@ -23,8 +23,9 @@
     "superagent": "3.8.2"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "test": ""
+    "start": "node index.js",
+    "test": "",
+    "dev": "nodemon index.js"
   },
   "dependencies": {}
 }
