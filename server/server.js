@@ -15,6 +15,9 @@ require('./middleware/appMiddleware')(app)
 
 app.use('/api', api)
 app.use('/auth', auth)
+app.get('/', function(req, res){
+ 	res.send("Hi I am a chatbot")
+})
 
 app.use(function(err, req, res, next){
   if(err.name === 'UnauthorizedError'){
