@@ -40,10 +40,10 @@ function wapiCall(text, sender){
         switch(user_action){      
             case "search_intent":
               search.search(wres._text)
-                  .then((wres) => {
-                    let wres = JSON.parse(wres)
+                  .then((dres) => {
+                    let dres = JSON.parse(dres.docs)
                     // console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
-                    sendText(wres, sender)
+                    sendText(dres, sender)
                   })
                   .catch((err) => {
                     logger.error(err)
@@ -64,16 +64,16 @@ function wapiCall(text, sender){
       })
 }
 
-function sendText(response, sender){
+function sendText(ads, sender){
   let responsePayload = constantPayload()
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
-  for(var i = 0; i < response.docs.length; i++) {
-    let title = response.docs[i].title
-    if (response.docs[i].image_count === 0) {
+  for(var i = 0; i < ads.length; i++) {
+    let title = ads[i].title
+    if (ads[i].image_count === 0) {
       let image_url = "https://images-eu.ssl-images-amazon.com/images/G/31/img18/Wireless/CEEX/SamsungA8Plus/1097541_galaxyA8shop_1500x300_1._CB486672680_.jpg"
     }
     else{
-      let image_url = response.docs[i].images
+      let image_url = ads[i].images
     }
     responsePayload.attachment.payload.elements.push(addValues(title, image_url))
   }
