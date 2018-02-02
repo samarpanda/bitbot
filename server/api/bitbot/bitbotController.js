@@ -30,18 +30,18 @@ function wapiCall(text, sender){
   wapi.message(text)
       .then((wres) => {
         wres = JSON.parse(wres.text)
-        console.log("$$$$ response form wapi " + wres)
+        // console.log("$$$$ response form wapi " + wres)
         let entities = wres.entities
-        console.log("$$$$ entities form wapi " + util.inspect(entities, {depth: null}))
+        // console.log("$$$$ entities form wapi " + util.inspect(entities, {depth: null}))
         let location = entities.location[0].value
-        console.log("$$$$ location form wapi " + util.inspect(location, {depth: null}))
+        // console.log("$$$$ location form wapi " + util.inspect(location, {depth: null}))
         let user_action = entities.user_action[0].value
-        console.log("$$$$$$ " + util.inspect(user_action, {depth: null}))
+        // console.log("$$$$$$ " + util.inspect(user_action, {depth: null}))
         switch(user_action){      
             case "search_intent":
               search.search(wres._text)
                   .then((wres) => {
-                    console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
+                    // console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
                     sendText(wres, sender)
                   })
                   .catch((err) => {
@@ -63,7 +63,7 @@ function wapiCall(text, sender){
       })
 }
 
-function sendText(sender, response){
+function sendText(response, sender){
   let responsePayload = constantPayload()
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
   for(var i = 0; i < response.docs.length; i++) {
