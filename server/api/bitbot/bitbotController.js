@@ -33,8 +33,8 @@ function wapiCall(text, sender){
         console.log("$$$$ response form wapi " + util.inspect(wres, {depth: null}))
         let entities = wres.entities
         let location = entities.location[0].value
-        console.log("$$$$$$ " + entities.location)
         let user_action = entities.user_action[0].value
+        console.log("$$$$$$ " + util.inspect(user_action, {depth: null}))
         switch(user_action){      
             case "search_intent":
               search.search(wres._text)
