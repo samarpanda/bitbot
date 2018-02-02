@@ -74,3 +74,28 @@ module.exports.getLiveOnQuikr = function(headerObj){
     })
   })
 }
+
+module.exports.getPopularAds = function (headerObj) {
+ return new Promise((resolve, reject) => {
+
+   request
+     // .get(`${config.qApi()}/mqdp/v1/popularAds`)
+     // .set(headerObj)
+     .get(`http://mobileqdp-29-149.com:8080/mqdp/v1/popularAds`)
+     .set(headerObj)
+     .end((err, res) => {
+       err ? reject(err) : resolve(res);
+     })
+   })
+}
+
+module.exports.getCityId = function(cityName, headerObj){
+  return new Promise((resolve, reject) => {
+    request
+    .get(`${config.qApi}/realestate/v1/citiesFull?name=${cityName}`)
+    .set(headerObj)
+    .end((err, res) => {
+      err ? reject(err) : resolve(res)
+    })
+  })
+}
