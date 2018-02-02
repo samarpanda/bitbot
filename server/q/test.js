@@ -12,11 +12,17 @@ auth.getAccessToken()
     return auth.getHeaders(res.body)
   })
   .then((obj) => {
-    api.getTrendingAdsByCityId(cityId, obj)
+    api.getPopularAds(cityId, 71, obj)
       .then((res) => {
         console.log(JSON.stringify(res.body))
       })
   })
+  // .then((obj) => {
+  //   api.getTrendingAdsByCityId(cityId, obj)
+  //     .then((res) => {
+  //       console.log(JSON.stringify(res.body))
+  //     })
+  // })
   // .then((obj) => {
   //   api.getAdsByLocation(12, 77, obj)
   //     .then((res) => {
