@@ -29,7 +29,8 @@ exports.post = function(req, res, next){
 function wapiCall(text, sender){
   wapi.message(text)
       .then((wres) => {
-        //console.log("$$$$ response form wapi " + util.inspect(wres, {depth: null}))
+        wres = JSON.parse(wres)
+        console.log("$$$$ response form wapi " + wres)
         let entities = wres.entities
         console.log("$$$$ entities form wapi " + util.inspect(entities, {depth: null}))
         let location = entities.location[0].value
