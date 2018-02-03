@@ -21,8 +21,10 @@ exports.post = function(req, res, next){
   for (let i = 0; i < messaging_events.length; i++) {
     let event = messaging_events[i]
     let sender = event.sender.id
+    console.log("$$$$ sender id before nlp " + event.sender.id)
     if (event.message && event.message.text) {
       let text = event.message.text
+      console.log("$$$$ request from messenger " + text)
       wapiCall(text, sender)
     }
   }
@@ -32,15 +34,16 @@ function wapiCall(text, sender){
   wapi.message(text)
       .then((wres) => {
         wres = JSON.parse(wres.text)
-        // console.log("$$$$ response form wapi " + wres)
+        console.log("$$$$ sender id after nlp call " + util.inspect(sender, {depth: null}))
         let entities = wres.entities
         // console.log("$$$$ entities form wapi " + util.inspect(entities, {depth: null}))
         let location = entities.location[0].value
-        // console.log("$$$$ location form wapi " + util.inspect(location, {depth: null}))
+        console.log("$$$$ location from nlp " + util.inspect(location, {depth: null}))
         let user_action = entities.user_action[0].value
-        // console.log("$$$$$$ " + util.inspect(user_action, {depth: null}))
+        console.log("$$$$$$ user_action from nlp" + util.inspect(user_action, {depth: null}))
         switch(user_action){      
             case "search_intent":
+            console.log(" $$$$ search_intent")
               search.search(wres._text)
                   .then((dres) => {
                     //let respo = JSON.parse(dres).docs
@@ -53,6 +56,7 @@ function wapiCall(text, sender){
                   })
               break
             case "trending_ads_intent":
+              console.log(" $$$$ trending_ads_intent")
               auth.getAccessToken()
                 .then((authRes) => {
                   return auth.getHeaders(authRes.body)
@@ -116,7 +120,7 @@ function sendResponse(sender, messagePayload){
 
 function sendText(ads, sender){
   let responsePayload = constantPayload
-  console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
+  console.log("$$$$ final sender id before sending response to messenger " + sender)
   let image_url, title
   ads.forEach((item, index) => {
     title = item.title
