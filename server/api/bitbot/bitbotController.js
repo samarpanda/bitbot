@@ -38,11 +38,19 @@ function wapiCall(text, sender){
         console.log("$$$$ sender id after nlp call " + util.inspect(sender, {depth: null}))
         let entities = wres.entities
         // console.log("$$$$ entities form wapi " + util.inspect(entities, {depth: null}))
-        let location = entities.location[0].value
-        console.log("$$$$ location from nlp " + util.inspect(location, {depth: null}))
-        let user_action = entities.user_action[0].value
-        console.log("$$$$$$ user_action from nlp" + util.inspect(user_action, {depth: null}))
-        switch(user_action){      
+        let location;
+        if(entities.hasOwnProperty('location')){
+          location = entities.location[0].value
+          console.log("$$$$ location from nlp " + util.inspect(location, {depth: null}))
+        }
+
+        let user_action;
+        if(entities.hasOwnProperty('user_action')){
+          user_action = entities.user_action[0].value
+          console.log("$$$$$$ user_action from nlp" + util.inspect(user_action, {depth: null}))
+        }
+
+        switch(user_action){
             case "search_intent":
             console.log(" $$$$ search_intent")
               search.search(wres._text)
@@ -182,14 +190,14 @@ function addValues(title, image_url){
       "type":"postback",
       "title":"Start Chatting",
       "payload":"DEVELOPER_DEFINED_PAYLOAD"
-    }              
-  ]      
+    }
+  ]
 }
 
   return str;
 }
 
-              
-            
-        
+
+
+
 
