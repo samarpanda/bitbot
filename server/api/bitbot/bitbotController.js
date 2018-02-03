@@ -66,7 +66,7 @@ function wapiCall(text, sender){
 }
 
 function sendText(ads, sender){
-  let responsePayload = constantPayload()
+  let responsePayload = constantPayload
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
   for(var i = 0; i < ads.length; i++) {
     let title = ads[i].title
