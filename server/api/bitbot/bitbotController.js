@@ -25,6 +25,7 @@ function getConstantPayload(){
     "payload":{
       "template_type":"generic",
       "elements":[]
+      }
     }
   }
 }
@@ -208,8 +209,3 @@ function addValues(title, image_url){
 
   return str;
 }
-
-
-
-
-
