@@ -161,17 +161,16 @@ function sendResponse(sender, messagePayload){
 function sendText(ads, sender){
   let responsePayload = getConstantPayload()
   console.log("$$$$ final sender id before sending response to messenger " + sender)
-  let image_url, title;
+  let image_url, title, adId;
   ads.forEach((item, index) => {
-
-    title = item.title || ''
-     if(item.hasOwnProperty('imgCount') && item.imgCount > 0 && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
+    {id, title} = item;
+    if(item.hasOwnProperty('imgCount') && item.imgCount > 0 && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
       image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com")
       console.log(image_url);
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
-    responsePayload.attachment.payload.elements.push(addValues(title, image_url))
+    responsePayload.attachment.payload.elements.push(addValues(title, image_url, id))
   })
   //console.log("$$$$ response at end " + util.inspect(responsePayload, {depth: null}))
   if(responsePayload.attachment.payload.elements.length)
@@ -181,11 +180,11 @@ function sendText(ads, sender){
 }
 
 
-function addValues(title, image_url){
+function addValues(title, image_url, id){
   var str = {
   "title":title,
   "image_url":image_url,
-  "subtitle":"We've got the right hat for everyone.",
+  "subtitle":"",
   "default_action": {
     "type": "web_url",
     "url": image_url,
@@ -196,7 +195,7 @@ function addValues(title, image_url){
   "buttons":[
     {
       "type":"web_url",
-      "url":"https://www.quikr.com",
+      "url":`https://www.quikr.com/SH0QQAdIdZ${id}`,
       "title":"View this"
     },
     {
