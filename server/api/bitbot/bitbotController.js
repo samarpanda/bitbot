@@ -125,7 +125,7 @@ function sendPopularAds(ares, sender){
   let ads = JSON.parse(ares.text).PopularAdsApplicationResponse.PopularAdsApplication.ad["0"]
   let responsePayload = getConstantPayload()
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
-  let image_url, title, adId
+  let image_url, title, adId;
   ads.forEach((item, index) => {
     adId = item.id
     title = item.title
@@ -197,7 +197,7 @@ function addValues(title, image_url, id){
   "buttons":[
     {
       "type":"web_url",
-      "url":`https://www.quikr.com/SH0QQAdIdZ${id}`,
+      "url":"https://www.quikr.com/SH0QQAdIdZ"+id,
       "title":"View this"
     },
     {
