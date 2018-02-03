@@ -101,13 +101,13 @@ const constantPayload = {
 }
 
 function addValues(title, image_url){
-  var str = `{
-  "title":${title},
-  "image_url":${image_url},
+  var str = {
+  "title":title,
+  "image_url":image_url,
   "subtitle":"We've got the right hat for everyone.",
   "default_action": {
     "type": "web_url",
-    "url": ${image_url},
+    "url": image_url,
     "messenger_extensions": true,
     "webview_height_ratio": "tall",
     "fallback_url": "https://www.quikr.com"
@@ -124,9 +124,9 @@ function addValues(title, image_url){
       "payload":"DEVELOPER_DEFINED_PAYLOAD"
     }              
   ]      
-}`
+}
 
-  return JSON.parse(str) 
+  return str;
 }
 
               
