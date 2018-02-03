@@ -17,6 +17,7 @@ exports.get = function(req, res){
 }
 
 var search = function(query){
+  console.log("$$$$ search request " + util.inspect(query, {depth: null}))
   return new Promise((resolve, reject) => {
   resolve(`{
     "success": true,
