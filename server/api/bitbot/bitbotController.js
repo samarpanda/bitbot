@@ -103,7 +103,8 @@ function sendPopularAds(ares, sender){
   ads.forEach((item, index) => {
     title = item.title
     if(item.images[0]){
-      image_url = item.images[0]
+      // image_url = item.images[0]
+      image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com");
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
