@@ -97,3 +97,41 @@ module.exports.getCityId = function(cityName, headerObj){
     })
   })
 }
+
+module.exports.getUserAds = function (email, headerObj) {
+  const { size } = {
+    size: 5
+  };
+
+  headerObj = {
+      'content-type':'application/json',
+      'X-Quikr-App-Id':'912',
+      'X-Quikr-Client':'Android.9_25',
+      'X-QUIKR-CLIENT-DEMAIL':'qae6ficmqr26y@quikr.com',
+      'X-Quikr-Client-Signature':'zXcv80386Mdp1hs0q7o0p9uiLZV37TdF',
+      'x-quikr-client-version':'9.25',
+      'x-quikr-signature-v2':'0657d0a548d65863d9a4e021ea02e4fd07a9d4b1',
+      'x-quikr-token-id':'790798480'
+  };
+  console.log(headerObj);
+  params = {
+      "sort" : { "createdTime" : "DESC" },
+     "size" : size,
+     "from" : 0,
+     "userEmail" : email,//"sbhave@quikr.com" ,
+     "filters" : { "entityType" : "BasicAd", "NCACreationValidation" : 0, "status" : 0},
+     "not_filters" : { "adQuikrSource" : 2 } ,
+     "fields" : ["id","title","imageDetails"]
+  }
+  console.log(params);
+  return new Promise((resolve, reject) => {
+   request
+      .post('http://192.168.124.123:9000/platform/v1/allAds')
+      .send(params)
+      .set('content-type', 'application/json')
+      .set('x-quikr-client', 'msite')
+      .end((err, res) => {
+        err ? reject(err) : resolve(res);
+      })
+   })
+}

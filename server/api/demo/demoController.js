@@ -40,3 +40,23 @@ qapi.getPopularAds(headerObj)
     logger.error(JSON.stringify(err))
   })
 }
+
+exports.adsbyemail = function(req, res, next){
+  logger.log(req.body.email);
+  const {email} = req.body;
+
+   auth.getAccessToken()
+     .then((authRes) => {
+       return auth.getHeaders(authRes.body)
+     })
+     .then((obj) => {
+       qapi.getUserAds(req.body.email, obj)
+         .then((ares) => {
+           // console.log(JSON.stringify(ares.text))
+           res.json(ares.text)
+         })
+         .catch((err) => {
+           logger.error(JSON.stringify(err))
+         })
+     })
+}
