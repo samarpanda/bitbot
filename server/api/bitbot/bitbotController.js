@@ -28,7 +28,7 @@ exports.post = function(req, res, next){
       wapiCall(text, sender)
     }
   }
-  res.status(200).send('ok')
+  res.status(200).end()
 }
 
 function wapiCall(text, sender){
