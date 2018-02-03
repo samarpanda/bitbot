@@ -8,13 +8,14 @@ const cityId = 23;
 
 auth.getAccessToken()
   .then((res) => {
-    console.log(res.body)
+    console.log(res)
     return auth.getHeaders(res.body)
   })
   .then((obj) => {
-    api.getPopularAds(cityId, 71, obj)
+    console.log(obj)
+    api.getPopularAds(obj)
       .then((res) => {
-        console.log(JSON.stringify(res.body))
+        console.log(JSON.stringify(res))
       })
   })
   // .then((obj) => {

@@ -6,6 +6,9 @@ module.exports = {
  publicApi(){
    return `${this.domain}/public`;
  },
+ qapi(){
+  return `${this.domain}`
+ },
  accessTokenUrl(){
    return `${this.domain}/app/auth/access_token`;
  }
