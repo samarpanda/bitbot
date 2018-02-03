@@ -75,7 +75,7 @@ function sendText(ads, sender){
        image_url = "https://images-eu.ssl-images-amazon.com/images/G/31/img18/Wireless/CEEX/SamsungA8Plus/1097541_galaxyA8shop_1500x300_1._CB486672680_.jpg"
     }
     else{
-      image_url = ads[i].images
+      image_url = `https://teja8.kuikr.com/${ads[i].images}`
     }
     responsePayload.attachment.payload.elements.push(addValues(title, image_url))
   }
