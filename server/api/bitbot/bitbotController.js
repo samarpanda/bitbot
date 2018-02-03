@@ -10,9 +10,9 @@ const token = "EAAH8lee0ZBnMBACe8ry6inf009p99ZADepqO6kLqZC6NAxBKk7NhM9B52r9i2CIS
 
 exports.get = function(req, res){
   if (req.query['hub.verify_token'] === "ujjwal") {
-    res.send(req.query['hub.challenge'])
+    res.status(200).send(req.query['hub.challenge'])
   }
-  res.send("Wrong token")
+  res.status(403).end()
 }
 
 exports.post = function(req, res, next){
