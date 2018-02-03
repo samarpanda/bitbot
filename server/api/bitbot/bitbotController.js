@@ -28,6 +28,7 @@ exports.post = function(req, res, next){
       wapiCall(text, sender)
     }
   }
+  res.status(200).send('ok')
 }
 
 function wapiCall(text, sender){
@@ -116,6 +117,9 @@ function sendResponse(sender, messagePayload){
     .then(function(res){
       console.log("$$$$ final response " + util.inspect(res, {depth: null}))
     })
+    .catch(() => {
+
+    })
 }
 
 function sendText(ads, sender){
@@ -131,7 +135,7 @@ function sendText(ads, sender){
     }
     responsePayload.attachment.payload.elements.push(addValues(title, image_url))
   })
-  console.log("$$$$ response at end " + util.inspect(responsePayload, {depth: null}))
+  //console.log("$$$$ response at end " + util.inspect(responsePayload, {depth: null}))
   sendResponse(sender, responsePayload)
   // request
   //   .post('https://graph.facebook.com/v2.6/me/messages')
