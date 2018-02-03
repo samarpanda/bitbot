@@ -79,7 +79,7 @@ module.exports.getPopularAds = function (headerObj) {
 
 
   return new Promise((resolve, reject) => {
-  resolve(`{
+  resolve({
     "PopularAdsApplicationResponse": {
         "PopularAdsApplication": {
             "ad": {
@@ -350,7 +350,7 @@ module.exports.getPopularAds = function (headerObj) {
             "requestId": "47c3e96f-30af-4e4a-955b-424ca3576601"
         }
     }
-}`)
+})
 })
  return new Promise((resolve, reject) => {
 

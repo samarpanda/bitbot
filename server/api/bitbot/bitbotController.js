@@ -3,6 +3,8 @@ var request = require('superagent')
 var wapi = require('../../wit/wapi')
 var search = require('../search/searchController')
 const util = require('util')
+var qapi = require('../../q/qapi')
+var auth = require('../../q/auth')
 
 const token = "EAAH8lee0ZBnMBACe8ry6inf009p99ZADepqO6kLqZC6NAxBKk7NhM9B52r9i2CISqwF4L8CSqASolK86AePF8aMJgKPIslt1fR9M1DSHydH2hcUAHLJ5SlqRBzrRt49rscStk9D0e8JUYK8imzVwW2fkjJuFtKde6bHHGiLiAZDZD"
 
@@ -51,6 +53,21 @@ function wapiCall(text, sender){
                   })
               break
             case "trending_ads_intent":
+              auth.getAccessToken()
+                .then((authRes) => {
+                  return auth.getHeaders(authRes.body)
+                })
+                .then((obj) => {
+                  qapi.getPopularAds(obj)
+                    .then((ares) => {
+                      // console.log(JSON.stringify(ares.text))
+                      sendPopularAds(ares, sender)
+                      //res.json(ares.text)
+                    })
+                    .catch((err) => {
+                      logger.error(JSON.stringify(err))
+                    })
+                })
               break
             case "messages_intent":
               break
@@ -63,6 +80,38 @@ function wapiCall(text, sender){
       .catch((err) => {
         logger.error(err)
       })
+}
+
+function sendPopularAds(ares, sender){
+  let ads = ares.PopularAdsApplicationResponse.PopularAdsApplication.ad["0"]
+  let responsePayload = constantPayload
+  console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
+  let image_url, title
+  ads.forEach((item, index) => {
+    title = item.title
+    if(item.images[0]){
+      image_url = item.images[0]
+    }else{
+      image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
+    }
+    responsePayload.attachment.payload.elements.push(addValues(title, image_url))
+  })
+  console.log("$$$$ response at end " + util.inspect(responsePayload, {depth: null}))
+  sendResponse(sender, responsePayload)
+}
+
+function sendResponse(sender, messagePayload){
+  request
+    .post('https://graph.facebook.com/v2.6/me/messages')
+    .set('content-type', 'application/json')
+    .query({access_token: token})
+    .send({
+      recipient: {id: sender},
+      message: messagePayload
+    })
+    .then(function(res){
+      console.log("$$$$ final response " + util.inspect(res, {depth: null}))
+    })
 }
 
 function sendText(ads, sender){
@@ -79,17 +128,18 @@ function sendText(ads, sender){
     responsePayload.attachment.payload.elements.push(addValues(title, image_url))
   })
   console.log("$$$$ response at end " + util.inspect(responsePayload, {depth: null}))
-  request
-    .post('https://graph.facebook.com/v2.6/me/messages')
-    .set('content-type', 'application/json')
-    .query({access_token: token})
-    .send({
-      recipient: {id: sender},
-      message: responsePayload
-    })
-    .then(function(res){
-      console.log("$$$$ final response " + util.inspect(res, {depth: null}))
-    })
+  sendResponse(sender, responsePayload)
+  // request
+  //   .post('https://graph.facebook.com/v2.6/me/messages')
+  //   .set('content-type', 'application/json')
+  //   .query({access_token: token})
+  //   .send({
+  //     recipient: {id: sender},
+  //     message: responsePayload
+  //   })
+  //   .then(function(res){
+  //     console.log("$$$$ final response " + util.inspect(res, {depth: null}))
+  //   })
 }
 
 const constantPayload = {
