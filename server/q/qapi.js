@@ -76,11 +76,21 @@ module.exports.getLiveOnQuikr = function(headerObj){
 }
 
 module.exports.getPopularAds = function (headerObj) {
+const headerObj1 = {
+"X-QUIKR-CLIENT-SIGNATURE":"zXcv80386Mdp1hs0q7o0p9uiLZV37TdF",
+"X-QUIKR-CLIENT-VERSION":"9.25",
+"Content-Type":"application/json",
+"X-QUIKR-CLIENT-DEMAIL":"qae6ficmqr26y@quikr.com",
+"X-Quikr-Client":"Android.9_25",
+"X-Quikr-Token-Id":"790798480",
+"X-Quikr-Signature-V2":"0657d0a548d65863d9a4e021ea02e4fd07a9d4b1",
+"X-Quikr-App-Id":"912"
+}
  return new Promise((resolve, reject) => {
 
    request
      .get(`https://api.quikr.com/mqdp/v1/popularAds`)
-     .set(headerObj)
+     .set(headerObj1)
      .end((err, res) => {
        err ? reject(err) : resolve(res);
      })

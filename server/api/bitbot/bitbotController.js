@@ -55,8 +55,8 @@ function wapiCall(text, sender){
             console.log(" $$$$ search_intent")
               search.search(wres._text)
                   .then((dres) => {
-                    //let respo = JSON.parse(dres).docs
-                    let respo = dres.text.SearchApplicationResponse.SearchApplication.ads;
+                    let rest = JSON.parse(dres.text)
+                    let respo = rest.SearchApplicationResponse.SearchApplication.ads;
                     console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
                     sendText(respo, sender)
                   })
@@ -96,15 +96,16 @@ function wapiCall(text, sender){
 }
 
 function sendPopularAds(ares, sender){
-  let ads = ares.PopularAdsApplicationResponse.PopularAdsApplication.ad["0"]
+  let ads = JSON.parse(ares.text).PopularAdsApplicationResponse.PopularAdsApplication.ad["0"]
   let responsePayload = constantPayload
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
   let image_url, title
   ads.forEach((item, index) => {
     title = item.title
-    if(item.images[0]){
-      // image_url = item.images[0]
+    if(item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
       image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com");
+      image_url = item.images[0].replace("http://teja2.kuikr.com","https://teja8.kuikr.com");
+      image_url = item.images[0].replace("http://teja3.kuikr.com","https://teja8.kuikr.com");
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
@@ -136,9 +137,9 @@ function sendText(ads, sender){
   console.log("$$$$ final sender id before sending response to messenger " + sender)
   let image_url, title
   ads.forEach((item, index) => {
-    title = item.title
-    if(item.image_count){
-      image_url = `https://teja8.kuikr.com/${item.images}`
+    title = item.title || ''
+    if(item.hasOwnProperty('imgCount') && item.imgCount && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
+      image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com");
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }

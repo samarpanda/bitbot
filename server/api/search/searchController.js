@@ -43,6 +43,7 @@ const headerObj = {
        "srchtype": 0,
        "categoryDetectionEnbaled": true,
        "isExistingUser": 0,
+       "per_page_items": 8,
        "from": "search",
        "page": 1,
        "self": false,
