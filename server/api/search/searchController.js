@@ -3,9 +3,9 @@ var request = require('superagent');
 //import someObject from ('./somefile.json')
 
 exports.post = function(req, res, next){
-  search(req)
+  search(req.body.query)
     .then((wres) => {
-      res.json(wres.text)
+      res.json(wres)
     })
     .catch((err) => {
       logger.error(err)
@@ -1269,7 +1269,7 @@ var search = function(query){
         "state": null
     }
 }`)
-
+})
 
   return new Promise((resolve, reject) => {
     request
@@ -1320,8 +1320,6 @@ var search = function(query){
         err ? reject(err) : resolve(res);
       })
   })
-})
-
 }
 
 module.exports.search = search
