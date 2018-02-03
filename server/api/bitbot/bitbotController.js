@@ -131,8 +131,8 @@ function sendPopularAds(ares, sender){
     title = item.title
     if(item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
       image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com");
-      image_url = item.images[0].replace("http://teja2.kuikr.com","https://teja8.kuikr.com");
-      image_url = item.images[0].replace("http://teja3.kuikr.com","https://teja8.kuikr.com");
+      image_url = image_url.replace("http://teja2.kuikr.com","https://teja8.kuikr.com");
+      image_url = image_url.replace("http://teja3.kuikr.com","https://teja8.kuikr.com");
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
@@ -155,7 +155,7 @@ function sendResponse(sender, messagePayload){
       console.log("$$$$ final response " + util.inspect(res, {depth: null}))
     })
     .catch((err) => {
-      console.log(err.text)
+      console.log("sendResponse err:" + err.text)
     })
 }
 
