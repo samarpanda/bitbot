@@ -87,6 +87,9 @@ function sendText(ads, sender){
       recipient: {id: sender},
       message: responsePayload
     })
+    .then(function(res){
+      console.log("$$$$ final response " + util.inspect(res, {depth: null}))
+    })
 }
 
 const constantPayload = {
