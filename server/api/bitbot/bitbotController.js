@@ -125,8 +125,9 @@ function sendPopularAds(ares, sender){
   let ads = JSON.parse(ares.text).PopularAdsApplicationResponse.PopularAdsApplication.ad["0"]
   let responsePayload = getConstantPayload()
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
-  let image_url, title
+  let image_url, title, adId
   ads.forEach((item, index) => {
+    adId = item.id
     title = item.title
     if(item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
       image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com");
@@ -135,7 +136,7 @@ function sendPopularAds(ares, sender){
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
-    responsePayload.attachment.payload.elements.push(addValues(title, image_url))
+    responsePayload.attachment.payload.elements.push(addValues(title, image_url, adId))
   })
   console.log("$$$$ response at end " + util.inspect(responsePayload, {depth: null}))
   sendResponse(sender, responsePayload)
