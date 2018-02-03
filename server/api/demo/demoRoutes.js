@@ -9,4 +9,7 @@ router.route('/')
 router.route('/getpopularads')
   .get(controller.getPopularAds)
 
+router.route('/adsbyemail')
+.post(controller.adsbyemail)
+
 module.exports = router
