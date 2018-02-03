@@ -165,8 +165,8 @@ function sendText(ads, sender){
 
     title = item.title || ''
      if(item.hasOwnProperty('imgCount') && item.imgCount > 0 && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
-+      image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com")
-+      console.log(image_url);
+      image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com")
+      console.log(image_url);
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
