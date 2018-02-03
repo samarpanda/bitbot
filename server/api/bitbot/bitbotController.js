@@ -168,7 +168,7 @@ function sendText(ads, sender){
     adId = item.id;
     if(item.hasOwnProperty('imgCount') && item.imgCount > 0 && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
       image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com")
-      console.log(image_url);
+      console.log("Image_URL: ", image_url);
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
