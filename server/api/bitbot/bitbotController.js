@@ -68,13 +68,14 @@ function wapiCall(text, sender){
 function sendText(ads, sender){
   let responsePayload = constantPayload
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
+  let image_url, title
   for(var i = 0; i < ads.length; i++) {
-    let title = ads[i].title
+    title = ads[i].title
     if (ads[i].image_count === 0) {
-      let image_url = "https://images-eu.ssl-images-amazon.com/images/G/31/img18/Wireless/CEEX/SamsungA8Plus/1097541_galaxyA8shop_1500x300_1._CB486672680_.jpg"
+       image_url = "https://images-eu.ssl-images-amazon.com/images/G/31/img18/Wireless/CEEX/SamsungA8Plus/1097541_galaxyA8shop_1500x300_1._CB486672680_.jpg"
     }
     else{
-      let image_url = ads[i].images
+      image_url = ads[i].images
     }
     responsePayload.attachment.payload.elements.push(addValues(title, image_url))
   }
