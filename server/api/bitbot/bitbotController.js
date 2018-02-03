@@ -56,7 +56,7 @@ function wapiCall(text, sender){
               search.search(wres._text)
                   .then((dres) => {
                     //let respo = JSON.parse(dres).docs
-                    let respo = dres.docs
+                    let respo = dres.text.SearchApplicationResponse.SearchApplication.ads;
                     console.log("$$$$ response form search " + util.inspect(wres, {depth: null}))
                     sendText(respo, sender)
                   })

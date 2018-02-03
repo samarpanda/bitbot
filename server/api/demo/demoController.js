@@ -33,8 +33,7 @@ exports.getPopularAds = function(req, res, next){
 // console.log(headerObj);
 qapi.getPopularAds(headerObj)
   .then((ares) => {
-    // console.log(ares)
-    res.json(JSON.parse(ares))
+    res.json(ares.text)
   })
   .catch((err) => {
     logger.error(JSON.stringify(err))
