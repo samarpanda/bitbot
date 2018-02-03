@@ -8,7 +8,18 @@ var auth = require('../../q/auth')
 
 const token = "EAAH8lee0ZBnMBACe8ry6inf009p99ZADepqO6kLqZC6NAxBKk7NhM9B52r9i2CISqwF4L8CSqASolK86AePF8aMJgKPIslt1fR9M1DSHydH2hcUAHLJ5SlqRBzrRt49rscStk9D0e8JUYK8imzVwW2fkjJuFtKde6bHHGiLiAZDZD"
 
-const constantPayload = {
+// const constantPayload = {
+//   "attachment":{
+//     "type":"template",
+//     "payload":{
+//       "template_type":"generic",
+//       "elements":[]
+//     }
+//   }
+// }
+
+function getConstantPayload(){
+  return {
   "attachment":{
     "type":"template",
     "payload":{
@@ -17,6 +28,7 @@ const constantPayload = {
     }
   }
 }
+
 
 exports.get = function(req, res){
   if (req.query['hub.verify_token'] === "ujjwal") {
@@ -110,7 +122,7 @@ function wapiCall(text, sender){
 
 function sendPopularAds(ares, sender){
   let ads = JSON.parse(ares.text).PopularAdsApplicationResponse.PopularAdsApplication.ad["0"]
-  let responsePayload = constantPayload
+  let responsePayload = getConstantPayload()
   console.log("$$$$ constantPayload " + util.inspect(responsePayload, {depth: null}))
   let image_url, title
   ads.forEach((item, index) => {
@@ -140,19 +152,21 @@ function sendResponse(sender, messagePayload){
     .then(function(res){
       console.log("$$$$ final response " + util.inspect(res, {depth: null}))
     })
-    .catch(() => {
-
+    .catch((err) => {
+      console.log(err.text)
     })
 }
 
 function sendText(ads, sender){
-  let responsePayload = constantPayload
+  let responsePayload = getConstantPayload()
   console.log("$$$$ final sender id before sending response to messenger " + sender)
-  let image_url, title
+  let image_url, title;
   ads.forEach((item, index) => {
+
     title = item.title || ''
-    if(item.hasOwnProperty('imgCount') && item.imgCount && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
-      image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com");
+     if(item.hasOwnProperty('imgCount') && item.imgCount > 0 && item.hasOwnProperty('images') && Array.isArray(item.images) && item.images[0]){
++      image_url = item.images[0].replace("http://teja1.kuikr.com","https://teja8.kuikr.com")
++      console.log(image_url);
     }else{
       image_url = `https://teja8.kuikr.com/restatic/image/tile-no-photo.jpg`;
     }
