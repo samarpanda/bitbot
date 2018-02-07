@@ -5,18 +5,9 @@ var search = require('../search/searchController')
 const util = require('util')
 var qapi = require('../../q/qapi')
 var auth = require('../../q/auth')
+var config = require('../../q/local.config')
 
-const token = "EAAH8lee0ZBnMBACe8ry6inf009p99ZADepqO6kLqZC6NAxBKk7NhM9B52r9i2CISqwF4L8CSqASolK86AePF8aMJgKPIslt1fR9M1DSHydH2hcUAHLJ5SlqRBzrRt49rscStk9D0e8JUYK8imzVwW2fkjJuFtKde6bHHGiLiAZDZD"
-
-// const constantPayload = {
-//   "attachment":{
-//     "type":"template",
-//     "payload":{
-//       "template_type":"generic",
-//       "elements":[]
-//     }
-//   }
-// }
+const token = config.fbtoken;
 
 function getConstantPayload(){
   return {

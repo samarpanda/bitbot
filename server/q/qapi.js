@@ -82,8 +82,8 @@ const headerObj1 = {
 "Content-Type":"application/json",
 "X-QUIKR-CLIENT-DEMAIL":"qae6ficmqr26y@quikr.com",
 "X-Quikr-Client":"Android.9_25",
-"X-Quikr-Token-Id":"790798480",
-"X-Quikr-Signature-V2":"0657d0a548d65863d9a4e021ea02e4fd07a9d4b1",
+"X-Quikr-Token-Id":"798877471",
+"X-Quikr-Signature-V2":"601a9ecd7792ff4adaba7ee29c095641439ba821",
 "X-Quikr-App-Id":"912"
 }
  return new Promise((resolve, reject) => {
